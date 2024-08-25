@@ -8,3 +8,13 @@ CREATE TABLE Pessoa (
     nome nome, 
     telefones VARCHAR(20)[]
 );
+
+CREATE TABLE Funcionario (
+    documento VARCHAR(20) PRIMARY KEY,
+    nome nome,
+    telefones VARCHAR(20)[],
+    data_nascimento DATE,
+    idade INT,
+    data_admissao DATE,
+    FOREIGN KEY (documento) REFERENCES Pessoa(documento)
+);
