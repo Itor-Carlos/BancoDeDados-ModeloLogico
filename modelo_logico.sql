@@ -26,3 +26,12 @@ CREATE TABLE Fornecedor(
 	nome_fantasia VARCHAR(50),
     FOREIGN KEY (documento) REFERENCES Pessoa(documento)
 );
+
+CREATE TABLE Cliente(
+    documento VARCHAR(20) PRIMARY KEY,
+    nome nome,
+    telefones VARCHAR(20)[],
+	nome_fantasia VARCHAR(50),
+	tipo BOOL,
+    FOREIGN KEY (documento) REFERENCES Pessoa(documento)
+);
