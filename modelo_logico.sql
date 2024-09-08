@@ -172,4 +172,31 @@ CREATE TABLE IF NOT EXISTS Manutencoes(
     FOREIGN KEY (Maquinario_id_maquinario , id_tipo_maquinario) REFERENCES Maquinario(id_maquinario , id_tipo_maquinario)
 );
 
+CREATE TABLE IF NOT EXISTS Saca (
+	id_saca INT NOT NULL,
+	peso FLOAT NOT NULL,
+	Transporte_id_transporte INT NOT NULL,
+  	Area_id_area INT NOT NULL,
+	PRIMARY KEY (id_saca),
+	FOREIGN KEY (Area_id_area) REFERENCES Area (id_area),
+	UNIQUE(id_saca, Transporte_id_transporte, Area_id_area) -- Chave única
+);
 
+
+CREATE TABLE IF NOT EXISTS Galpao_has_Saca (
+  Galpao_id_galpao INT NOT NULL,
+  Saca_id_saca INT NOT NULL,
+  Saca_Transporte_id_transporte INT NOT NULL,
+  Saca_Area_id_area INT NOT NULL,
+  PRIMARY KEY (Galpao_id_galpao, Saca_id_saca, Saca_Transporte_id_transporte, Saca_Area_id_area),
+  FOREIGN KEY (Galpao_id_galpao) REFERENCES Galpao(id_galpao),
+  FOREIGN KEY (Saca_id_saca, Saca_Transporte_id_transporte, Saca_Area_id_area) REFERENCES Saca(id_saca, Transporte_id_transporte, Area_id_area)
+);
+
+CREATE TABLE IF NOT EXISTS Transacao_has_Saca (
+  Transacao_idTransacao INT NULL,
+  Saca_id_saca INT NULL,
+  PRIMARY KEY (Transacao_idTransacao, Saca_id_saca),
+  FOREIGN KEY (Transacao_idTransacao) REFERENCES Transacao (idTransacao),
+  FOREIGN KEY (Saca_id_saca) REFERENCES Saca (id_saca)
+);
