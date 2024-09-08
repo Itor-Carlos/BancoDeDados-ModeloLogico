@@ -5,4 +5,5 @@
 
 
 ### Modelo Lógico
-![image](https://github.com/user-attachments/assets/16cb7036-ca2d-4b82-ae82-85e79378afc7)
+![image](https://github.com/user-attachments/assets/8d7d3b5d-09a3-4c12-9fc8-a73b02b04a5a)
+
