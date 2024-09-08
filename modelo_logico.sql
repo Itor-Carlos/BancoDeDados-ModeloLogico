@@ -200,3 +200,11 @@ CREATE TABLE IF NOT EXISTS Transacao_has_Saca (
   FOREIGN KEY (Transacao_idTransacao) REFERENCES Transacao (idTransacao),
   FOREIGN KEY (Saca_id_saca) REFERENCES Saca (id_saca)
 );
+
+CREATE TABLE IF NOT EXISTS Transporte_has_Saca (
+  Transporte_id_transporte INT NOT NULL,
+  Saca_id_saca INT NOT NULL,
+  PRIMARY KEY (Transporte_id_transporte, Saca_id_saca),
+  FOREIGN KEY (Transporte_id_transporte) REFERENCES Envio_carga (id_envio_carga),
+  FOREIGN KEY (Saca_id_saca) REFERENCES Saca (id_saca)
+);
