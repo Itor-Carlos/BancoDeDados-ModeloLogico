@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS Maquinario(
     FOREIGN KEY (id_tipo_maquinario) REFERENCES Tipo_Maquinario(id_tipo_maquinario)
 );
 
-CREATE TABLE IF NOT EXISTS Transporte_has_Maquinario(
+CREATE TABLE IF NOT EXISTS EnvioCarga_has_Maquinario(
     id_envio_carga INT NOT NULL,
     Maquina_id_maquinario INT NOT NULL,
     id_tipo_maquinario INT NOT NULL,
@@ -175,22 +175,20 @@ CREATE TABLE IF NOT EXISTS Manutencoes(
 CREATE TABLE IF NOT EXISTS Saca (
 	id_saca INT NOT NULL,
 	peso FLOAT NOT NULL,
-	Transporte_id_transporte INT NOT NULL,
+	EnvioCarga_id_envio_carga INT NOT NULL,
   	Area_id_area INT NOT NULL,
 	PRIMARY KEY (id_saca),
 	FOREIGN KEY (Area_id_area) REFERENCES Area (id_area),
-	UNIQUE(id_saca, Transporte_id_transporte, Area_id_area) -- Chave única
+	UNIQUE(id_saca, EnvioCarga_id_envio_carga, Area_id_area) -- Chave única
 );
 
 
 CREATE TABLE IF NOT EXISTS Galpao_has_Saca (
   Galpao_id_galpao INT NOT NULL,
   Saca_id_saca INT NOT NULL,
-  Saca_Transporte_id_transporte INT NOT NULL,
-  Saca_Area_id_area INT NOT NULL,
-  PRIMARY KEY (Galpao_id_galpao, Saca_id_saca, Saca_Transporte_id_transporte, Saca_Area_id_area),
+  PRIMARY KEY (Galpao_id_galpao, Saca_id_saca),
   FOREIGN KEY (Galpao_id_galpao) REFERENCES Galpao(id_galpao),
-  FOREIGN KEY (Saca_id_saca, Saca_Transporte_id_transporte, Saca_Area_id_area) REFERENCES Saca(id_saca, Transporte_id_transporte, Area_id_area)
+  FOREIGN KEY (Saca_id_saca) REFERENCES Saca(id_saca)
 );
 
 CREATE TABLE IF NOT EXISTS Transacao_has_Saca (
@@ -201,10 +199,10 @@ CREATE TABLE IF NOT EXISTS Transacao_has_Saca (
   FOREIGN KEY (Saca_id_saca) REFERENCES Saca (id_saca)
 );
 
-CREATE TABLE IF NOT EXISTS Transporte_has_Saca (
-  Transporte_id_transporte INT NOT NULL,
+CREATE TABLE IF NOT EXISTS EnvioCarga_has_Saca (
+  EnvioCarga_id_envio_carga INT NOT NULL,
   Saca_id_saca INT NOT NULL,
-  PRIMARY KEY (Transporte_id_transporte, Saca_id_saca),
-  FOREIGN KEY (Transporte_id_transporte) REFERENCES Envio_carga (id_envio_carga),
+  PRIMARY KEY (EnvioCarga_id_envio_carga, Saca_id_saca),
+  FOREIGN KEY (EnvioCarga_id_envio_carga) REFERENCES Envio_carga (id_envio_carga),
   FOREIGN KEY (Saca_id_saca) REFERENCES Saca (id_saca)
 );
